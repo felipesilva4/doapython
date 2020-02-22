@@ -100,13 +100,12 @@ class dragons:
 					print(url)
 					i=0
 					j=1
-				#time.sleep(2)
-
+			
 
 		ataque = ataca_inimigos(coordenadas_x, coordenadas_y, generais_ids, time_real, gangster, session_id, login_token )
 
 		print('primeiro sleep')
-		time.sleep(300)
+		time.sleep(320)
 
 		data = login()
 		print(json.dumps(data, indent = 4, sort_keys=True))
@@ -118,7 +117,7 @@ class dragons:
 
 		ataque = ataca_inimigos(coordenadas_x_1, coordenadas_y_1, generais_ids, time_real, gangster, session_id, login_token)
 		print('segundo sleep')
-		time.sleep(300)
+		time.sleep(250)
 
 		data = login()
 		print(json.dumps(data, indent = 4, sort_keys=True))
@@ -137,7 +136,7 @@ class dragons:
 
 		ataque = ataca_inimigos(coordenadas_x_2, coordenadas_y_2, generais_ids, time_real, gangster, session_id, login_token )
 		print('terceiro sleep, indo pegar carne')
-		time.sleep(300)
+		time.sleep(260)
 
 		data = login()
 		print(json.dumps(data, indent = 4, sort_keys=True))
@@ -463,7 +462,9 @@ class dragons:
 			print(json.dumps(result, indent = 4, sort_keys=True))
 			s = hashlib.md5(result.get('token_md5').encode('utf-8')).hexdigest()
 			url = 'http://doamobile.com/api/cities/459/units.json?t='+time+'&s='+result.get('token_md5')+'&r=1&rm_id=277'
+			pega = requests.post(url, payload_ogros, headers)
 
+			
 			hoplitas_payload = {
 				'units[unit_type]': 'ShieldHalberdier',
 				'units[quantity]': 1500,
