@@ -11,6 +11,44 @@ import schedule
 
 class dragons:
 	def all():
+		def init():
+			#atacar = Ataques()
+			#general = pega_generais()
+			#cave = send_dragon_cave()
+			#pedras_catch = pedras()
+			#treino_tropas = treinar()
+
+		def Ataques():
+			#coordenadas de oponentes para ataque
+			x = [0,260, 243, 167, 136, 99, 229, 117, 558, 549]
+			y = [0,556, 563, 579, 592, 595, 705, 707, 628, 617]
+
+			x1 = [551, 558, 408, 448, 332, 546, 632, 234, 54, 713]
+			y1 = [619, 609, 569, 640, 539, 618, 589, 447, 490, 540]
+
+			x2 =[303,689, 691,692,696,697,693,710,716, 708]
+			y2 =[348,727, 722,717,715, 711, 711,694, 690, 692]
+
+			x3 = [616, 527,616, 480, 433, 487, 538, 546,552, 555]
+			y3 = [733, 730,561, 510, 574, 588, 638, 631,638, 638]
+
+			x4 = [692, 687,681,681,679, 673,666,659,645, 640]
+			y4 = [726, 720,722,721,722, 725,721,725,733, 737]
+
+			#Faz um array 2D com as coordenadas
+			coordenadas_x = [x, x1, x2, x3, x4]
+			coordenadas_y = [y, y1, y2, y3, y4]
+
+			#array com o id de cada general (é possuir alterar o general pelo id)
+			generais_ids = [3584510, 6517744, 6587403, 7514149, 7514151, 7514029, 7389878, 7297918, 6517744, 7389878]
+
+			i = 0
+			#Ataca as coordenadas a cada 5 minutos
+			for z in coordenadas_x:
+				atacar = ataca_inimigos(z, coordenadas_y[i], generais_ids)
+				i += 1
+				time.sleep(300)
+
 		def login():
 			dragon = 'http://www.doamobile.com/api/login?t=1581880588&s=d7f6ab7cd9edf8da2ff729cc0ddc4189&r=0'
 			payload = {
@@ -22,11 +60,6 @@ class dragons:
 			x = requests.get(dragon, payload)
 			data = json.loads(x.text)
 			return data
-
-		data = login()
-		print(json.dumps(data, indent = 4, sort_keys=True))
-		print(data.get('client_cachebreaker'))
-		gangster = data.get('gangster')
 
 		def timeStamp():
 			data_e_hora_atuais = datetime.now()
@@ -42,22 +75,15 @@ class dragons:
 			result = re.sub(r"\..*", '', str(time_stamp))
 			return result
 
-		time_real = timeStamp()
-		print (time_real)
-
-		session_id = data.get('_session_id')
-		login_token = data.get('login_token')
-		print("session_id = ", str(session_id))
-
-		coordenadas_x = [0,260, 243, 167, 136, 99, 229, 117, 558, 549]
-		coordenadas_y = [0,556, 563, 579, 592, 595, 705, 707, 628, 617]
-
-		coordenadas_x_1 = [551, 558, 408, 448, 332, 546, 632, 234, 54, 713]
-		coordenadas_y_1 = [619, 609, 569, 640, 539, 618, 589, 447, 490, 540]
-		generais_ids = [6247275,7092528,6587403,7034076,7374566,7374547,6559833,4898179,6517744,7389878]
 
 
-		def ataca_inimigos(coordenadas_x, coordenadas_y, generais_ids, time, gang, session, login_token):
+		def ataca_inimigos(coordenadas_x, coordenadas_y, generais_ids):
+			time = timeStamp()
+			data = login()
+			print(json.dumps(data, indent = 4, sort_keys=True))
+			print(data.get('client_cachebreaker'))
+			session = data.get('_session_id')
+			login_token = data.get('login_token')
 			url = 'http://doamobile.com/api/cities/459/marches.json?t='+time+'&r=0&rm_id=277'
 			print(url)
 			i=0
@@ -101,68 +127,11 @@ class dragons:
 					i=0
 					j=1
 			
-
-		ataque = ataca_inimigos(coordenadas_x, coordenadas_y, generais_ids, time_real, gangster, session_id, login_token )
-
-		print('primeiro sleep')
-		time.sleep(320)
-
-		data = login()
-		print(json.dumps(data, indent = 4, sort_keys=True))
-		print(data.get('client_cachebreaker'))
-		gangster = data.get('gangster')
-		time_real = timeStamp()
-		session_id = data.get('_session_id')
-		login_token = data.get('login_token')
-
-		ataque = ataca_inimigos(coordenadas_x_1, coordenadas_y_1, generais_ids, time_real, gangster, session_id, login_token)
-		print('segundo sleep')
-		time.sleep(250)
-
-		data = login()
-		print(json.dumps(data, indent = 4, sort_keys=True))
-		print(data.get('client_cachebreaker'))
-		gangster = data.get('gangster')
-
-		time_real = timeStamp()
-		session_id = data.get('_session_id')
-		login_token = data.get('login_token')
-		coordenadas_x_2 =[303,689, 691,692,696,697,693,710,716, 708]
-		coordenadas_y_2 =[348,727, 722,717,715, 711, 711,694, 690, 692]
-
-		coordenadas_x_4 = [692, 687,681,681,679, 673,666,659,645, 640]
-		coordenadas_y_4 = [726, 720,722,721,722, 725,721,725,733, 737]
-
-
-		ataque = ataca_inimigos(coordenadas_x_2, coordenadas_y_2, generais_ids, time_real, gangster, session_id, login_token )
-		print('terceiro sleep, indo pegar carne')
-		time.sleep(260)
-
-		data = login()
-		print(json.dumps(data, indent = 4, sort_keys=True))
-		print(data.get('client_cachebreaker'))
-		gangster = data.get('gangster')
-
-		time_real = timeStamp()
-		session_id = data.get('_session_id')
-		login_token = data.get('login_token')
-		ataque = ataca_inimigos(coordenadas_x_4, coordenadas_y_4, generais_ids, time_real, gangster, session_id, login_token )
-		time.sleep(300)
-
-		data = login()
-		print(json.dumps(data, indent = 4, sort_keys=True))
-		print(data.get('client_cachebreaker'))
-		gangster = data.get('gangster')
-
-		time_real = timeStamp()
-		session_id = data.get('_session_id')
-		login_token = data.get('login_token')
-
-		coordenadas_x_5 = [616, 527,616, 480, 433, 487, 538, 546,552, 555]
-		coordenadas_y_5 = [733, 730,561, 510, 574, 588, 638, 631,638, 638]
-		ataque = ataca_inimigos(coordenadas_x_5, coordenadas_y_5, generais_ids, time_real, gangster, session_id, login_token )
-
-		def pega_generais(time, session_id, login_token):
+		def pega_generais():
+			data = login()
+			time = timeStamp()
+			session_id = data.get('_session_id')
+			login_token = data.get('login_token')
 			url = 'http://doamobile.com/api/cities/459/generals/gacha?t='+time+'&r=4&rm_id=277'
 			payload = {
 				'gacha_id': '1',
@@ -195,17 +164,12 @@ class dragons:
 			pega2 = requests.post(url2, payload, headers)
 			print(pega2.text)
 
-		data = login()
-		time_real = timeStamp()
-		session_id = data.get('_session_id')
-		login_token = data.get('login_token')
-		generais_pega = pega_generais(time_real, session_id, login_token)
 
-		def cria_hash(srting):
-			s = hashlib.md5(string.encode('utf-8')).hexdigest()
-			return s
-
-		def send_dragon_cave(time, session_id, login_token):
+		def send_dragon_cave():
+			data = login()
+			time = timeStamp()
+			session_id = data.get('_session_id')
+			login_token = data.get('login_token')
 			url = 'http://doamobile.com/api/dragon_train/play?t='+time+'&r=5&rm_id=277'
 
 			headers = {
@@ -388,14 +352,13 @@ class dragons:
 			pega4 = requests.post(url, payload_dragon_get5, headers)
 			print(pega.text)
 
-		data = login()
-		time_real = timeStamp()
-		session_id = data.get('_session_id')
-		login_token = data.get('login_token')
 
-		dragons = send_dragon_cave(time_real, session_id, login_token)
 
-		def pedras(time_real, session, login_token):
+		def pedras():
+			data = login()
+			time_real = timeStamp()
+			session = data.get('_session_id')
+			login_token = data.get('login_token')
 			url =  'http://doamobile.com/api/dummy_items/trade_in.json?t='+time_real+'&r=0&rm_id=277'
 
 			headers = {
@@ -428,13 +391,12 @@ class dragons:
 			print(response.text)
 			time.sleep(3)
 
-		data = login()
-		time_real = timeStamp()
-		session_id = data.get('_session_id')
-		login_token = data.get('login_token')
-		pedras = pedras(time_real, session_id, login_token)
 
-		def treinar (time, session_id, login_token):
+		def treinar ():
+			data = login()
+			time = timeStamp()
+			session_id = data.get('_session_id')
+			login_token = data.get('login_token')
 			url = 'http://doamobile.com/api/cities/459/units.json?t='+time+'&r=1&rm_id=277'	
 
 			headers = {
@@ -463,11 +425,11 @@ class dragons:
 			s = hashlib.md5(result.get('token_md5').encode('utf-8')).hexdigest()
 			url = 'http://doamobile.com/api/cities/459/units.json?t='+time+'&s='+result.get('token_md5')+'&r=1&rm_id=277'
 			pega = requests.post(url, payload_ogros, headers)
+			print(pega.text)
 
-			
 			hoplitas_payload = {
 				'units[unit_type]': 'ShieldHalberdier',
-				'units[quantity]': 1500,
+				'units[quantity]': 2315,
 				'gangster': 'ff1a76be57a7d46b2622ffdfabfaf68f76f8c927',
 				'_session_id': session_id,
 				'login_token': login_token,
@@ -478,7 +440,7 @@ class dragons:
 
 			bigas_payload = {
 				'units[unit_type]': 'FireDragonTroop',
-				'units[quantity]': 700,
+				'units[quantity]': 70000,
 				'gangster': 'ff1a76be57a7d46b2622ffdfabfaf68f76f8c927',
 				'_session_id': session_id,
 				'login_token': login_token,
@@ -487,13 +449,13 @@ class dragons:
 			}
 			pega = requests.post(url, bigas_payload, headers)
 
-		data = login()
-		time_real = timeStamp()
-		session_id = data.get('_session_id')
-		login_token = data.get('login_token')
-		treino = treinar(time_real, session_id, login_token)
+		#treino = treinar(time_real, session_id, login_token)
 
-	schedule.every(10).minutes.do(all)
+		inicio = init()
+
+
+	#Schedule para rodar o programa em looping de tempo
+	schedule.every(1).seconds.do(all)
 
 	while True:
 		schedule.run_pending() 
