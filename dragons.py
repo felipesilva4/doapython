@@ -12,11 +12,21 @@ import schedule
 class dragons:
 	def all():
 		def init():
-			atacar = Ataques()
-			general = pega_generais()
-			cave = send_dragon_cave()
-			pedras_catch = pedras()
-			treino_tropas = treinar()
+			#atacar = Ataques()
+			#general = pega_generais()
+			#cave = send_dragon_cave()
+			#pedras_catch = pedras()
+			#treino_tropas = treinar()
+			i = 0
+			while (i<10):
+				aqui = Arena()
+				arena_dragoes = Arena_ataque()
+				arena_dragoes1 = Arena_ataque1()
+				arena_dragoes2 = Arena_ataque2()
+				print('tentativa: '+str(i))
+				i+=1
+			#evolution = evoluir()
+			#abrir = itens()
 
 		def Ataques():
 			#coordenadas de oponentes para ataque
@@ -38,9 +48,12 @@ class dragons:
 			x5 = [672, 677, 677, 678, 694, 697, 705, 712, 732, 687]
 			y5 = [734, 728, 725, 724, 715, 712, 710, 705, 710, 745]
 
+			x6 =[690, 689, 687, 688, 693, 680, 678, 675, 669, 649]
+			y6 =[723, 722, 721, 718, 713, 705, 705, 705, 704, 732]
+
 			#Faz um array 2D com as coordenadas
-			coordenadas_x = [x, x1, x2, x3, x4, x5]
-			coordenadas_y = [y, y1, y2, y3, y4, y5]
+			coordenadas_x = [x, x1, x2, x3, x4, x5, x6]
+			coordenadas_y = [y, y1, y2, y3, y4, y5, y6]
 
 			#array com o id de cada general (é possuir alterar o general pelo id)
 			generais_ids = [3584510, 7044779, 6587403, 7514149, 7514151, 7514029, 7389878, 7297918, 7527984, 7516212]
@@ -173,6 +186,92 @@ class dragons:
 			time = timeStamp()
 			session_id = data.get('_session_id')
 			login_token = data.get('login_token')
+
+			headers = {
+				'X-Unity-Version': '4.7.1f1',
+				'Content-Type': 'application/x-www-form-urlencoded',
+				'User-Agent': 'Dalvik/2.1.0 (Linux; U; Android 9; Redmi Note 7 MIUI/V11.0.5.0.PFGMIXM)',
+				'Host': 'www.doamobile.com',
+				'Connection': 'Keep-Alive',
+				'Accept-Encoding': 'gzip',
+				'Content-Length': 170
+			}
+
+			url2 = 'http://www.doamobile.com/api/dragon_train/claim?t='+time+'&r=2&rm_id=277'
+
+			payload_dragon_get = {
+				'dragon': 'GreatDragon',
+				'cave_id': 1,
+				'gangster': 'ff1a76be57a7d46b2622ffdfabfaf68f76f8c927',
+				'_session_id': session_id,
+				'login_token': login_token,
+				'v': '9.7.0',
+				'platform': 11,
+				'_method': 'PUT'
+			} 
+
+			payload_dragon_get1 = {
+				'dragon': 'NightshadeDragon',
+				'cave_id': 2,
+				'gangster': 'ff1a76be57a7d46b2622ffdfabfaf68f76f8c927',
+				'_session_id': session_id,
+				'login_token': login_token,
+				'v': '9.7.0',
+				'platform': 11,
+				'_method': 'PUT'
+			}
+
+			payload_dragon_get2 = {
+				'dragon': 'EarthDragon',
+				'cave_id': 3,
+				'gangster': 'ff1a76be57a7d46b2622ffdfabfaf68f76f8c927',
+				'_session_id': session_id,
+				'login_token': login_token,
+				'v': '9.7.0',
+				'platform': 11,
+				'_method': 'PUT'
+
+			}
+
+			payload_dragon_get4 = {
+				'dragon': 'ToxicDragon',
+				'cave_id': 4,
+				'fte': 'false',
+				'gangster': 'ff1a76be57a7d46b2622ffdfabfaf68f76f8c927',
+				'_session_id': session_id,
+				'login_token': login_token,
+				'v': '9.7.0',
+				'platform': 11,
+				'_method': 'PUT'
+
+			}
+
+			payload_dragon_get5 = {
+				'dragon': 'FireDragon',
+				'cave_id': 5,
+				'play_mode': 0,
+				'gangster': 'ff1a76be57a7d46b2622ffdfabfaf68f76f8c927',
+				'_session_id': session_id,
+				'login_token': login_token,
+				'v': '9.7.0',
+				'platform': 11,
+				'_method': 'PUT'
+			}
+
+			pega = requests.post(url2, payload_dragon_get, headers)
+			result = json.loads(pega.text)
+			print(json.dumps(result, indent = 4, sort_keys=True))
+			s = hashlib.md5(result.get('token_md5').encode('utf-8')).hexdigest()
+
+			url2 = 'http://www.doamobile.com/api/dragon_train/claim?t='+time+'&s='+result.get('token_md5')+'&r=2&rm_id=277'
+
+			pega = requests.post(url2, payload_dragon_get, headers)
+			pega0 = requests.post(url2, payload_dragon_get1, headers)
+			pega1 = requests.post(url2, payload_dragon_get2, headers)
+			pega3 = requests.post(url2, payload_dragon_get4, headers)
+			pega4 = requests.post(url2, payload_dragon_get5, headers)
+			
+
 			url = 'http://doamobile.com/api/dragon_train/play?t='+time+'&r=5&rm_id=277'
 
 			headers = {
@@ -263,85 +362,6 @@ class dragons:
 			pega4 = requests.post(url, payload3, headers)
 			pega5 = requests.post(url, payload4, headers)
 			print(pega.text)
-
-			url2 = 'http://www.doamobile.com/api/dragon_train/claim?t='+time+'&s='+result.get('token_md5')+'&r=2&rm_id=277'
-
-			payload_dragon_get = {
-				'dragon': 'GreatDragon',
-				'cave_id': 1,
-				'play_mode': 0,
-				'gangster': 'ff1a76be57a7d46b2622ffdfabfaf68f76f8c927',
-				'_session_id': session_id,
-				'login_token': login_token,
-				'v': '9.7.0',
-				'platform': 11
-			} 
-
-			payload_dragon_get1 = {
-				'dragon': 'NightshadeDragon',
-				'cave_id': '2',
-				'play_mode': '0',
-				'fte': 'false',
-				'gangster': 'ff1a76be57a7d46b2622ffdfabfaf68f76f8c927',
-				'_session_id': session_id,
-				'login_token': login_token,
-				'v': '9.7.0',
-				'platform': '11'
-			}
-
-			payload_dragon_get2 = {
-				'dragon': 'EarthDragon',
-				'cave_id': 3,
-				'play_mode': 0,
-				'fte': 'false',
-				'gangster': 'ff1a76be57a7d46b2622ffdfabfaf68f76f8c927',
-				'_session_id': session_id,
-				'login_token': login_token,
-				'v': '9.7.0',
-				'platform': 11
-			}
-
-			payload_dragon_get3 = {
-				'dragon': 'EarthDragon',
-				'cave_id': 3,
-				'play_mode': 0,
-				'fte': 'false',
-				'gangster': 'ff1a76be57a7d46b2622ffdfabfaf68f76f8c927',
-				'_session_id': session_id,
-				'login_token': login_token,
-				'v': '9.7.0',
-				'platform': 11
-			}
-
-			payload_dragon_get4 = {
-				'dragon': 'ToxicDragon',
-				'cave_id': 4,
-				'play_mode': 0,
-				'fte': 'false',
-				'gangster': 'ff1a76be57a7d46b2622ffdfabfaf68f76f8c927',
-				'_session_id': session_id,
-				'login_token': login_token,
-				'v': '9.7.0',
-				'platform': 11
-			}
-
-			payload_dragon_get5 = {
-				'dragon': 'FireDragon',
-				'cave_id': 5,
-				'play_mode': 0,
-				'fte': 'false',
-				'gangster': 'ff1a76be57a7d46b2622ffdfabfaf68f76f8c927',
-				'_session_id': session_id,
-				'login_token': login_token,
-				'v': '9.7.0',
-				'platform': 11
-			}
-
-			pega = requests.post(url, payload_dragon_get, headers)
-			pega1 = requests.post(url, payload_dragon_get2, headers)
-			pega2 = requests.post(url, payload_dragon_get3, headers)
-			pega3 = requests.post(url, payload_dragon_get4, headers)
-			pega4 = requests.post(url, payload_dragon_get5, headers)
 			print(pega.text)
 
 
@@ -362,7 +382,7 @@ class dragons:
 				'Accept-Encoding': 'gzip',
 				'Content-Length': 146
 			}
-
+			#Pedras verde
 			payload = {
 				'event_id': 16404,
 				'trade_in_id': 1547104325,
@@ -372,8 +392,42 @@ class dragons:
 				'v': '9.7.0',
 				'platform': 11
 			}
+			#Pedras amarelas
+			payloado_amarela = {
+				'event_id': 16404,
+				'trade_in_id': 1411641332,
+				'gangster': 'ff1a76be57a7d46b2622ffdfabfaf68f76f8c927',
+				'_session_id': session,
+				'login_token': login_token,
+				'v': '9.7.0',
+				'platform': 11
+			}
+			#Pedra azul
+			payload_azul = {
+				'event_id': 16404,
+				'trade_in_id': 1411641348,
+				'gangster': 'ff1a76be57a7d46b2622ffdfabfaf68f76f8c927',
+				'_session_id': session,
+				'login_token': login_token,
+				'v': '9.7.0',
+				'platform': 11
+			}
+
+			#Pedra carne
+			payload_carne = {
+				'event_id': 16404,
+				'trade_in_id': 1436527147,
+				'gangster': 'ff1a76be57a7d46b2622ffdfabfaf68f76f8c927',
+				'_session_id': session,
+				'login_token': login_token,
+				'v': '9.7.0',
+				'platform': 11
+			}
 
 			pega = requests.post(url, payload, headers)
+			pega = requests.post(url, payloado_amarela, headers)
+			pega = requests.post(url, payload_azul, headers)
+			pega = requests.post(url, payload_carne, headers)
 			result = json.loads(pega.text)
 			print(json.dumps(result, indent = 4, sort_keys=True))
 			s = hashlib.md5(result.get('token_md5').encode('utf-8')).hexdigest()
@@ -381,6 +435,9 @@ class dragons:
 			url = 'http://doamobile.com/api/dummy_items/trade_in.json?t='+time_real+'&s='+result.get('token_md5')+'&r=0&rm_id=277'
 			response = requests.post(url, payload, headers)
 			print(response.text)
+			pega = requests.post(url, payloado_amarela, headers)
+			pega = requests.post(url, payload_azul, headers)
+			pega = requests.post(url, payload_carne, headers)
 			time.sleep(3)
 
 
@@ -441,13 +498,248 @@ class dragons:
 			}
 			pega = requests.post(url, bigas_payload, headers)
 
-		#treino = treinar(time_real, session_id, login_token)
+
+
+		def evoluir():
+			data = login()
+			time = timeStamp()
+			session_id = data.get('_session_id')
+			login_token = data.get('login_token')
+			url = 'http://doamobile.com/api/player_items/UpgradeUnitD/troop_upgrade.json?t='+time+'&r=1&rm_id=277'
+
+			headers = {
+				'X-Unity-Version': '4.7.1f1',
+				'Content-Type': 'application/x-www-form-urlencoded',
+				'User-Agent': 'Dalvik/2.1.0 (Linux; U; Android 9; Redmi Note 7 MIUI/V11.0.5.0.PFGMIXM)',
+				'Host': 'www.doamobile.com',
+				'Connection': 'Keep-Alive',
+				'Accept-Encoding': 'gzip',
+				'Content-Length': 146
+			}
+
+			payload = {
+				'quantity': 16,
+				'unit_type': 'EarthDragonTroop',
+				'upgrade_times': 1,
+				'gangster': 'ff1a76be57a7d46b2622ffdfabfaf68f76f8c927',
+				'_session_id': session_id,
+				'login_token': login_token,
+				'v': '9.7.0',
+				'platform': '11'
+			}
+			pega = requests.post(url, payload, headers)
+			result = json.loads(pega.text)
+			print(json.dumps(result, indent = 4, sort_keys=True))
+			s = hashlib.md5(result.get('token_md5').encode('utf-8')).hexdigest()
+			url = 'http://doamobile.com/api/player_items/UpgradeUnitD/troop_upgrade.json?t='+time+'&s='+result.get('token_md5')+'&r=1&rm_id=277'
+			result = requests.post(url, payload, headers)
+			print(result.text)
+			exit()
+
+
+		def itens():
+			data = login()
+			time = timeStamp()
+			session_id = data.get('_session_id')
+			login_token = data.get('login_token')
+
+			url = 'http://doamobile.com/api/player_items/electricshock.json?t='+time+'&r=2&rm_id=277'
+
+			headers = {
+				'X-Unity-Version': '4.7.1f1',
+				'Content-Type': 'application/x-www-form-urlencoded',
+				'User-Agent': 'Dalvik/2.1.0 (Linux; U; Android 9; Redmi Note 7 MIUI/V11.0.5.0.PFGMIXM)',
+				'Host': 'www.doamobile.com',
+				'Connection': 'Keep-Alive',
+				'Accept-Encoding': 'gzip',
+				'Content-Length': 146
+			}
+
+			payload = {
+				'quantity': 1,
+				'gangster': 'ff1a76be57a7d46b2622ffdfabfaf68f76f8c927',
+				'_session_id': session_id,
+				'login_token': login_token,
+				'v': '9.7.0',
+				'platform': '11',
+				'_method': 'delete'	
+			}
+
+			payload2 = {
+				'quantity': 1,
+				'gangster': 'ff1a76be57a7d46b2622ffdfabfaf68f76f8c927',
+				'_session_id': session_id,
+				'login_token': login_token,
+				'v': '9.7.0',
+				'platform': '11',
+				'_method': 'PATCH'	
+			}
+
+			pega = requests.post(url, payload, headers)
+			result = json.loads(pega.text)
+			print(json.dumps(result, indent = 4, sort_keys=True))
+			s = hashlib.md5(result.get('token_md5').encode('utf-8')).hexdigest()
+			url = 'http://doamobile.com/api/player_items/electricshock.json?t='+time+'&s='+result.get('token_md5')+'&r=2&rm_id=277'
+			result = requests.post(url, payload2, headers)
+			print(result)
+			
+
+		def Arena():
+			data = login()
+			time = timeStamp()
+			session_id = data.get('_session_id')
+			login_token = data.get('login_token')
+			url = 'http://doamobile.com/api/dragon_arenas/382673/enter_arena.json?t='+time+'&r=28&rm_id=277'
+
+			headers = {
+				'X-Unity-Version': '4.7.1f1',
+				'Content-Type': 'application/x-www-form-urlencoded',
+				'User-Agent': 'Dalvik/2.1.0 (Linux; U; Android 9; Redmi Note 7 MIUI/V11.0.5.0.PFGMIXM)',
+				'Host': 'www.doamobile.com',
+				'Connection': 'Keep-Alive',
+				'Accept-Encoding': 'gzip',
+				'Content-Length': 146
+			}
+
+			payload ={
+				'need_fte': 'True',
+				'gangster': 'ff1a76be57a7d46b2622ffdfabfaf68f76f8c927',
+				'_session_id': session_id,
+				'login_token': login_token,
+				'v': '9.7.0',
+				'platform': '11'
+			}
+
+			pega = requests.post(url, payload, headers)
+			result = json.loads(pega.text)
+			print(json.dumps(result, indent = 4, sort_keys=True))
+			s = hashlib.md5(result.get('token_md5').encode('utf-8')).hexdigest()
+			url = 'http://doamobile.com/api/dragon_arenas/382673/enter_arena.json?t='+time+'&s='+result.get('token_md5')+'&r=28&rm_id=277'
+			result = requests.post(url, payload, headers)
+			print(result.text)
+			print ("entrei caraio")
+			
+		def Arena_ataque():
+			data = login()
+			time_real = timeStamp()
+			session_id = data.get('_session_id')
+			login_token = data.get('login_token')
+
+			url = 'http://doamobile.com/api/dragon_arenas/battle.json?t='+time_real+'&r=27&rm_id=277'
+
+			headers = {
+				'X-Unity-Version': '4.7.1f1',
+				'Content-Type': 'application/x-www-form-urlencoded',
+				'User-Agent': 'Dalvik/2.1.0 (Linux; U; Android 9; Redmi Note 7 MIUI/V11.0.5.0.PFGMIXM)',
+				'Host': 'www.doamobile.com',
+				'Connection': 'Keep-Alive',
+				'Accept-Encoding': 'gzip',
+				'Content-Length': 146
+			}
+
+			payload = {
+				'enemy_id': 0,
+				'arena_id': 382673,
+				'gangster': 'ff1a76be57a7d46b2622ffdfabfaf68f76f8c927',
+				'_session_id': session_id,
+				'login_token': login_token,
+				'v': '9.7.0',
+				'platform': '11'
+			}
+
+			
+
+			pega = requests.post(url, payload, headers)
+			result = json.loads(pega.text)
+			print(json.dumps(result, indent = 4, sort_keys=True))
+			s = hashlib.md5(result.get('token_md5').encode('utf-8')).hexdigest()
+			url1 = 'http://doamobile.com/api/dragon_arenas/battle.json?t='+time_real+'&s='+result.get('token_md5')+'&r=27&rm_id=277'
+			resultado = requests.post(url1, payload, headers)
+			print(resultado.text)
+
+
+		def Arena_ataque1():
+			data = login()
+			time_real = timeStamp()
+			session_id = data.get('_session_id')
+			login_token = data.get('login_token')
+
+			url = 'http://doamobile.com/api/dragon_arenas/battle.json?t='+time_real+'&r=27&rm_id=277'
+
+			headers = {
+				'X-Unity-Version': '4.7.1f1',
+				'Content-Type': 'application/x-www-form-urlencoded',
+				'User-Agent': 'Dalvik/2.1.0 (Linux; U; Android 9; Redmi Note 7 MIUI/V11.0.5.0.PFGMIXM)',
+				'Host': 'www.doamobile.com',
+				'Connection': 'Keep-Alive',
+				'Accept-Encoding': 'gzip',
+				'Content-Length': 146
+			}
+
+			payload = {
+				'enemy_id': 2,
+				'arena_id': 382673,
+				'gangster': 'ff1a76be57a7d46b2622ffdfabfaf68f76f8c927',
+				'_session_id': session_id,
+				'login_token': login_token,
+				'v': '9.7.0',
+				'platform': '11'
+			}
+
+			
+
+			pega = requests.post(url, payload, headers)
+			result = json.loads(pega.text)
+			print(json.dumps(result, indent = 4, sort_keys=True))
+			s = hashlib.md5(result.get('token_md5').encode('utf-8')).hexdigest()
+			url1 = 'http://doamobile.com/api/dragon_arenas/battle.json?t='+time_real+'&s='+result.get('token_md5')+'&r=27&rm_id=277'
+			resultado = requests.post(url1, payload, headers)
+			print(resultado.text)
+
+		def Arena_ataque2():
+			data = login()
+			time_real = timeStamp()
+			session_id = data.get('_session_id')
+			login_token = data.get('login_token')
+
+			url = 'http://doamobile.com/api/dragon_arenas/battle.json?t='+time_real+'&r=27&rm_id=277'
+
+			headers = {
+				'X-Unity-Version': '4.7.1f1',
+				'Content-Type': 'application/x-www-form-urlencoded',
+				'User-Agent': 'Dalvik/2.1.0 (Linux; U; Android 9; Redmi Note 7 MIUI/V11.0.5.0.PFGMIXM)',
+				'Host': 'www.doamobile.com',
+				'Connection': 'Keep-Alive',
+				'Accept-Encoding': 'gzip',
+				'Content-Length': 146
+			}
+
+			payload = {
+				'enemy_id': 4,
+				'arena_id': 382673,
+				'gangster': 'ff1a76be57a7d46b2622ffdfabfaf68f76f8c927',
+				'_session_id': session_id,
+				'login_token': login_token,
+				'v': '9.7.0',
+				'platform': '11'
+			}
+
+			
+
+			pega = requests.post(url, payload, headers)
+			result = json.loads(pega.text)
+			print(json.dumps(result, indent = 4, sort_keys=True))
+			s = hashlib.md5(result.get('token_md5').encode('utf-8')).hexdigest()
+			url1 = 'http://doamobile.com/api/dragon_arenas/battle.json?t='+time_real+'&s='+result.get('token_md5')+'&r=27&rm_id=277'
+			resultado = requests.post(url1, payload, headers)
+			print(resultado.text)
 
 		inicio = init()
 
 
 	#Schedule para rodar o programa em looping de tempo
-	schedule.every(60).minutes.do(all)
+	#schedule.every(60).minutes.do(all)
+	schedule.every(1).seconds.do(all)
 
 	while True:
 		schedule.run_pending() 
