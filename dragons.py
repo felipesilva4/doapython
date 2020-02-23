@@ -12,35 +12,38 @@ import schedule
 class dragons:
 	def all():
 		def init():
-			#atacar = Ataques()
-			#general = pega_generais()
-			#cave = send_dragon_cave()
-			#pedras_catch = pedras()
-			#treino_tropas = treinar()
+			atacar = Ataques()
+			general = pega_generais()
+			cave = send_dragon_cave()
+			pedras_catch = pedras()
+			treino_tropas = treinar()
 
 		def Ataques():
 			#coordenadas de oponentes para ataque
-			x = [0,260, 243, 167, 136, 99, 229, 117, 558, 549]
-			y = [0,556, 563, 579, 592, 595, 705, 707, 628, 617]
+			x = [686, 260, 243, 167, 136, 99,  229, 117, 558, 549]
+			y = [0, 556, 563, 579, 592, 595, 705, 707, 628, 617]
 
-			x1 = [551, 558, 408, 448, 332, 546, 632, 234, 54, 713]
+			x1 = [551, 558, 408, 448, 332, 546, 632, 234, 54,  713]
 			y1 = [619, 609, 569, 640, 539, 618, 589, 447, 490, 540]
 
-			x2 =[303,689, 691,692,696,697,693,710,716, 708]
-			y2 =[348,727, 722,717,715, 711, 711,694, 690, 692]
+			x2 =[303, 689, 691, 692, 696, 697, 693, 710, 716, 708]
+			y2 =[348, 727, 722, 717, 715, 711, 711, 694, 690, 692]
 
-			x3 = [616, 527,616, 480, 433, 487, 538, 546,552, 555]
-			y3 = [733, 730,561, 510, 574, 588, 638, 631,638, 638]
+			x3 = [616, 527, 616, 480, 433, 487, 538, 546,552, 555]
+			y3 = [733, 730, 561, 510, 574, 588, 638, 631,638, 638]
 
-			x4 = [692, 687,681,681,679, 673,666,659,645, 640]
-			y4 = [726, 720,722,721,722, 725,721,725,733, 737]
+			x4 = [692, 687, 681, 681, 679, 673, 666, 659, 645, 640]
+			y4 = [726, 720, 722, 721, 722, 725, 721, 725, 733, 737]
+
+			x5 = [672, 677, 677, 678, 694, 697, 705, 712, 732, 687]
+			y5 = [734, 728, 725, 724, 715, 712, 710, 705, 710, 745]
 
 			#Faz um array 2D com as coordenadas
-			coordenadas_x = [x, x1, x2, x3, x4]
-			coordenadas_y = [y, y1, y2, y3, y4]
+			coordenadas_x = [x, x1, x2, x3, x4, x5]
+			coordenadas_y = [y, y1, y2, y3, y4, y5]
 
 			#array com o id de cada general (é possuir alterar o general pelo id)
-			generais_ids = [3584510, 6517744, 6587403, 7514149, 7514151, 7514029, 7389878, 7297918, 6517744, 7389878]
+			generais_ids = [3584510, 7044779, 6587403, 7514149, 7514151, 7514029, 7389878, 7297918, 7527984, 7516212]
 
 			i = 0
 			#Ataca as coordenadas a cada 5 minutos
@@ -164,7 +167,7 @@ class dragons:
 			pega2 = requests.post(url2, payload, headers)
 			print(pega2.text)
 
-
+		#Enviar dragoes para caverna e/ou pegar reconpensas
 		def send_dragon_cave():
 			data = login()
 			time = timeStamp()
@@ -206,17 +209,6 @@ class dragons:
 				'platform': 11
 			}
 
-			payload2 = {
-				'dragon': 'EarthDragon',
-				'cave_id': 3,
-				'play_mode': 0,
-				#'fte': 'false',
-				'gangster': 'ff1a76be57a7d46b2622ffdfabfaf68f76f8c927',
-				'_session_id': session_id,
-				'login_token': login_token,
-				'v': '9.7.0',
-				'platform': 11
-			}
 
 			payload3 = {
 				'dragon': 'EarthDragon',
@@ -266,10 +258,10 @@ class dragons:
 			print(session_id)
 			print(login_token)
 			pega = requests.post(url, payload, headers)
-			pega2 = requests.post(url, payload2, headers)
-			pega3 = requests.post(url, payload3, headers)
-			pega4 = requests.post(url, payload4, headers)
-			pega5 = requests.post(url, payload5, headers)
+			pega2 = requests.post(url, payload1, headers)
+			pega3 = requests.post(url, payload5, headers)
+			pega4 = requests.post(url, payload3, headers)
+			pega5 = requests.post(url, payload4, headers)
 			print(pega.text)
 
 			url2 = 'http://www.doamobile.com/api/dragon_train/claim?t='+time+'&s='+result.get('token_md5')+'&r=2&rm_id=277'
@@ -455,7 +447,7 @@ class dragons:
 
 
 	#Schedule para rodar o programa em looping de tempo
-	schedule.every(1).seconds.do(all)
+	schedule.every(60).minutes.do(all)
 
 	while True:
 		schedule.run_pending() 
