@@ -616,7 +616,6 @@ class dragons:
 			s = hashlib.md5(result.get('token_md5').encode('utf-8')).hexdigest()
 			url = 'http://doamobile.com/api/dragon_arenas/382673/enter_arena.json?t='+time+'&s='+result.get('token_md5')+'&r=28&rm_id=277'
 			result = requests.post(url, payload, headers)
-			print(result.text)
 			print ("entrei caraio")
 			
 		def Arena_ataque():
@@ -655,7 +654,6 @@ class dragons:
 			s = hashlib.md5(result.get('token_md5').encode('utf-8')).hexdigest()
 			url1 = 'http://doamobile.com/api/dragon_arenas/battle.json?t='+time_real+'&s='+result.get('token_md5')+'&r=27&rm_id=277'
 			resultado = requests.post(url1, payload, headers)
-			print(resultado.text)
 
 
 		def Arena_ataque1():
@@ -694,7 +692,6 @@ class dragons:
 			s = hashlib.md5(result.get('token_md5').encode('utf-8')).hexdigest()
 			url1 = 'http://doamobile.com/api/dragon_arenas/battle.json?t='+time_real+'&s='+result.get('token_md5')+'&r=27&rm_id=277'
 			resultado = requests.post(url1, payload, headers)
-			print(resultado.text)
 
 		def Arena_ataque2():
 			data = login()
@@ -732,7 +729,6 @@ class dragons:
 			s = hashlib.md5(result.get('token_md5').encode('utf-8')).hexdigest()
 			url1 = 'http://doamobile.com/api/dragon_arenas/battle.json?t='+time_real+'&s='+result.get('token_md5')+'&r=27&rm_id=277'
 			resultado = requests.post(url1, payload, headers)
-			print(resultado.text)
 
 		inicio = init()
 
