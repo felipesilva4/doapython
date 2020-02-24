@@ -12,6 +12,7 @@ import schedule
 class dragons:
 	def all():
 		def init():
+			pedras_catch = pedras()
 			atacar = Ataques()
 			general = pega_generais()
 			cave = send_dragon_cave()
@@ -63,6 +64,7 @@ class dragons:
 			for z in coordenadas_x:
 				atacar = ataca_inimigos(z, coordenadas_y[i], generais_ids)
 				i += 1
+				print('Esse ataque é de numero: '+ str(i))
 				time.sleep(300)
 
 		def login():
@@ -132,7 +134,6 @@ class dragons:
 
 
 				ataque = requests.post(url, payload, headers)
-				print (ataque.text)
 				i += 1
 				if(j == 0):
 					result = json.loads(ataque.text)
@@ -178,7 +179,6 @@ class dragons:
 			url2 = 'http://doamobile.com/api/cities/459/generals/gacha?t='+time+'&s='+result.get('token_md5')+'&r=4&rm_id=277'
 			print(url2)
 			pega2 = requests.post(url2, payload, headers)
-			print(pega2.text)
 
 		#Enviar dragoes para caverna e/ou pegar reconpensas
 		def send_dragon_cave():
@@ -361,8 +361,6 @@ class dragons:
 			pega3 = requests.post(url, payload5, headers)
 			pega4 = requests.post(url, payload3, headers)
 			pega5 = requests.post(url, payload4, headers)
-			print(pega.text)
-			print(pega.text)
 
 
 
@@ -474,7 +472,6 @@ class dragons:
 			s = hashlib.md5(result.get('token_md5').encode('utf-8')).hexdigest()
 			url = 'http://doamobile.com/api/cities/459/units.json?t='+time+'&s='+result.get('token_md5')+'&r=1&rm_id=277'
 			pega = requests.post(url, payload_ogros, headers)
-			print(pega.text)
 
 			hoplitas_payload = {
 				'units[unit_type]': 'ShieldHalberdier',
@@ -581,7 +578,6 @@ class dragons:
 			s = hashlib.md5(result.get('token_md5').encode('utf-8')).hexdigest()
 			url = 'http://doamobile.com/api/player_items/electricshock.json?t='+time+'&s='+result.get('token_md5')+'&r=2&rm_id=277'
 			result = requests.post(url, payload2, headers)
-			print(result)
 			
 
 		def Arena():
@@ -655,7 +651,7 @@ class dragons:
 			s = hashlib.md5(result.get('token_md5').encode('utf-8')).hexdigest()
 			url1 = 'http://doamobile.com/api/dragon_arenas/battle.json?t='+time_real+'&s='+result.get('token_md5')+'&r=27&rm_id=277'
 			resultado = requests.post(url1, payload, headers)
-			print(resultado.text)
+			
 
 
 		def Arena_ataque1():
@@ -694,7 +690,7 @@ class dragons:
 			s = hashlib.md5(result.get('token_md5').encode('utf-8')).hexdigest()
 			url1 = 'http://doamobile.com/api/dragon_arenas/battle.json?t='+time_real+'&s='+result.get('token_md5')+'&r=27&rm_id=277'
 			resultado = requests.post(url1, payload, headers)
-			print(resultado.text)
+			
 
 		def Arena_ataque2():
 			data = login()
@@ -732,13 +728,12 @@ class dragons:
 			s = hashlib.md5(result.get('token_md5').encode('utf-8')).hexdigest()
 			url1 = 'http://doamobile.com/api/dragon_arenas/battle.json?t='+time_real+'&s='+result.get('token_md5')+'&r=27&rm_id=277'
 			resultado = requests.post(url1, payload, headers)
-			print(resultado.text)
 
 		inicio = init()
 
 
 	#Schedule para rodar o programa em looping de tempo
-	schedule.every(30).minutes.do(all)
+	schedule.every(35).minutes.do(all)
 	#schedule.every(1).seconds.do(all)
 
 	while True:
