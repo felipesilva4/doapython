@@ -63,9 +63,12 @@ class dragons:
 			#Ataca as coordenadas a cada 5 minutos
 			for z in coordenadas_x:
 				atacar = ataca_inimigos(z, coordenadas_y[i], generais_ids)
-				i += 1
 				print('Esse ataque é de numero: '+ str(i))
-				time.sleep(300)
+				if(i==6):
+					print('passando direto')
+				else:
+					time.sleep(300)
+				i += 1
 
 		def login():
 			dragon = 'http://www.doamobile.com/api/login?t=1581880588&s=d7f6ab7cd9edf8da2ff729cc0ddc4189&r=0'
