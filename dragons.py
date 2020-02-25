@@ -435,7 +435,7 @@ class dragons:
 
 			url = 'http://doamobile.com/api/dummy_items/trade_in.json?t='+time_real+'&s='+result.get('token_md5')+'&r=0&rm_id=277'
 			response = requests.post(url, payload, headers)
-			print(response.text)
+			
 			pega = requests.post(url, payloado_amarela, headers)
 			pega = requests.post(url, payload_azul, headers)
 			pega = requests.post(url, payload_carne, headers)
@@ -476,6 +476,7 @@ class dragons:
 			url = 'http://doamobile.com/api/cities/459/units.json?t='+time+'&s='+result.get('token_md5')+'&r=1&rm_id=277'
 			pega = requests.post(url, payload_ogros, headers)
 
+
 			hoplitas_payload = {
 				'units[unit_type]': 'ShieldHalberdier',
 				'units[quantity]': 2315,
@@ -497,6 +498,8 @@ class dragons:
 				'platform': '11'
 			}
 			pega = requests.post(url, bigas_payload, headers)
+
+			print('terminei aqui, agora é só esperar o prximo. Obrigado')
 
 
 
