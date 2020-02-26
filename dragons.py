@@ -52,8 +52,8 @@ class dragons:
 			x6 =[690, 689, 687, 688, 693, 680, 678, 675, 669, 649]
 			y6 =[723, 722, 721, 718, 713, 705, 705, 705, 704, 732]
 
-			x7 = [494,  42,   6, 667, 612, 158, 707, 620, 275]
-			y7 = [469, 188, 730,  25, 746, 666, 718,  42, 137]
+			x7 = [494,  42,   6, 667, 612, 158, 707, 620, 275, 42]
+			y7 = [469, 188, 730,  25, 746, 666, 718,  42, 137, 188]
 
 			#Faz um array 2D com as coordenadas
 			coordenadas_x = [x, x1, x2, x3, x4, x5, x6, x7]
@@ -67,7 +67,7 @@ class dragons:
 			for z in coordenadas_x:
 				atacar = ataca_inimigos(z, coordenadas_y[i], generais_ids)
 				print('Esse ataque é de numero: '+ str(i))
-				if(i==6):
+				if(i==7):
 					print('passando direto')
 				else:
 					time.sleep(300)
