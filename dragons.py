@@ -52,9 +52,12 @@ class dragons:
 			x6 =[690, 689, 687, 688, 693, 680, 678, 675, 669, 649]
 			y6 =[723, 722, 721, 718, 713, 705, 705, 705, 704, 732]
 
+			x7 = [494,  42,   6, 667, 612, 158, 707, 620, 275]
+			y7 = [469, 188, 730,  25, 746, 666, 718,  42, 137]
+
 			#Faz um array 2D com as coordenadas
-			coordenadas_x = [x, x1, x2, x3, x4, x5, x6]
-			coordenadas_y = [y, y1, y2, y3, y4, y5, y6]
+			coordenadas_x = [x, x1, x2, x3, x4, x5, x6, x7]
+			coordenadas_y = [y, y1, y2, y3, y4, y5, y6, y7]
 
 			#array com o id de cada general (é possuir alterar o general pelo id)
 			generais_ids = [3584510, 7044779, 6587403, 7514149, 7514151, 7514029, 7389878, 7297918, 7527984, 7516212]
@@ -434,8 +437,7 @@ class dragons:
 			s = hashlib.md5(result.get('token_md5').encode('utf-8')).hexdigest()
 
 			url = 'http://doamobile.com/api/dummy_items/trade_in.json?t='+time_real+'&s='+result.get('token_md5')+'&r=0&rm_id=277'
-			response = requests.post(url, payload, headers)
-			
+
 			pega = requests.post(url, payloado_amarela, headers)
 			pega = requests.post(url, payload_azul, headers)
 			pega = requests.post(url, payload_carne, headers)
@@ -536,8 +538,7 @@ class dragons:
 			s = hashlib.md5(result.get('token_md5').encode('utf-8')).hexdigest()
 			url = 'http://doamobile.com/api/player_items/UpgradeUnitD/troop_upgrade.json?t='+time+'&s='+result.get('token_md5')+'&r=1&rm_id=277'
 			result = requests.post(url, payload, headers)
-			print(result.text)
-			exit()
+
 
 
 		def itens():
@@ -739,7 +740,7 @@ class dragons:
 
 
 	#Schedule para rodar o programa em looping de tempo
-	schedule.every(35).minutes.do(all)
+	schedule.every(90).minutes.do(all)
 	#schedule.every(1).seconds.do(all)
 
 	while True:
